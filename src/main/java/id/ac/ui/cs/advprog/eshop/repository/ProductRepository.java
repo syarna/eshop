@@ -9,12 +9,13 @@ import java.util.List;
 
 @Repository
 public class ProductRepository {
-    private List<Product> productDate = new ArrayList<>();
+    private List<Product> productData = new ArrayList<>();
+
     public Product create(Product product) {
-        productDate.add(product);
+        productData.add(product);
         return product;
     }
    public Iterator<Product> findAll() {
-        return productDate.iterator();
+        return productData.iterator();
    }
 }
