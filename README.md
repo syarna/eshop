@@ -11,16 +11,16 @@ Saat menambahkan fitur delete dan edit product, saya memiliki 1 kesulitan yaitu 
 yang ditampilkan berurut khususnya ketika delete product saya belum tau bagaimana cara mengurutkan
 ID nya. contoh: <br>
 
-Jika terdapat 3 produk yang saya tambahkan, misalnya:
+Jika terdapat 3 produk yang saya tambahkan, misalnya: <br>
 (ID = 1) -> ayam <br>
 (ID = 2) -> bebek <br>
 (ID = 3) -> telur <br>
 
-dan saya hapus produk ke-2, maka hasilnya:
+dan saya hapus produk ke-2, maka hasilnya: <br>
 (ID = 1) -> ayam <br>
 (ID = 3) -> telur <br>
 
-seharusnya ID telur adalah 2. namun saya telah berhasil memperbaiki kodenya sehingga hasilnya sesuai.
+seharusnya ID telur adalah 2. namun saya telah berhasil memperbaiki kodenya sehingga hasilnya sesuai. <br>
 
 
 
