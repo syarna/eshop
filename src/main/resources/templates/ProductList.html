@@ -3,30 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <title>Product List</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
-<h2>Product List</h2>
-<table border="1">
-  <thead>
-  <tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Quantity</th>
-    <th>Actions</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="product : ${products}">
-    <td th:text="${product.id}"></td>
-    <td th:text="${product.name}"></td>
-    <td th:text="${product.quantity}"></td>
-    <td>
-      <a th:href="@{/product/edit/{id}(id=${product.id})}">Edit</a> |
-      <a th:href="@{/product/delete/{id}(id=${product.id})}" onclick="return confirm('Are you sure?')">Delete</a>
-    </td>
-  </tr>
-  </tbody>
-</table>
-<a href="/product/create">Create New Product</a>
+<div class="container">
+  <h2>Product List</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Quantity</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${products}">
+      <td th:text="${product.id}"></td>
+      <td th:text="${product.name}"></td>
+      <td th:text="${product.quantity}"></td>
+      <td class="actions">
+        <a th:href="@{/product/edit/{id}(id=${product.id})}" class="button edit">Edit</a>
+        <a th:href="@{/product/delete/{id}(id=${product.id})}" class="button delete" onclick="return confirm('Are you sure?')">Delete</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <a href="/product/create" class="button">Create New Product</a>
+</div>
 </body>
 </html>
