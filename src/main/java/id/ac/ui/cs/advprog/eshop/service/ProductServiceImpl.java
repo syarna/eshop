@@ -24,7 +24,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product findById(int id) {
+    public Product findById(String id) { // Ubah parameter ke String
         return productRepository.findById(id);
     }
 
@@ -34,7 +34,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(String id) { // Ubah parameter ke String
         productRepository.delete(id);
     }
 }
