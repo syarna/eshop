@@ -1,20 +1,20 @@
 package id.ac.ui.cs.advprog.eshop.model;
 
 public class Product {
-    private int id;
+    private String id;
     private String name;
     private int quantity;
 
     public Product() {}
 
-    public Product(int id, String name, int quantity) {
+    public Product(String id, String name, int quantity) {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
     }
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
