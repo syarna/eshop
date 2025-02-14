@@ -15,7 +15,12 @@ public class ProductRepository {
         productData.add(product);
         return product;
     }
-   public Iterator<Product> findAll() {
+
+    public Iterator<Product> findAll() {
         return productData.iterator();
-   }
+    }
+
+    public void deleteById(String productId) {
+        productData.removeIf(product -> product.getProductId().equals(productId));
+    }
 }
