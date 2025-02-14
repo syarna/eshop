@@ -1,25 +1,24 @@
 package id.ac.ui.cs.advprog.eshop.model;
 
 public class Product {
-    private Long productId;
-    private String productName;
-    private Integer productQuantity;
+    private int id;
+    private String name;
+    private int quantity;
 
-    public Product() {
+    public Product() {}
+
+    public Product(int id, String name, int quantity) {
+        this.id = id;
+        this.name = name;
+        this.quantity = quantity;
     }
 
-    public Product(Long productId, String productName, Integer productQuantity) {
-        this.productId = productId;
-        this.productName = productName;
-        this.productQuantity = productQuantity;
-    }
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public Long getProductId() { return productId; }
-    public void setProductId(Long productId) { this.productId = productId; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public String getProductName() { return productName; }
-    public void setProductName(String productName) { this.productName = productName; }
-
-    public Integer getProductQuantity() { return productQuantity; }
-    public void setProductQuantity(Integer productQuantity) { this.productQuantity = productQuantity; }
+    public int getQuantity() { return quantity; }
+    public void setQuantity(int quantity) { this.quantity = quantity; }
 }
