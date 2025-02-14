@@ -4,6 +4,7 @@ import id.ac.ui.cs.advprog.eshop.model.Product;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Repository
@@ -17,8 +18,8 @@ public class ProductRepository {
         return product;
     }
 
-    public List<Product> findAll() {
-        return new ArrayList<>(productData);
+    public Iterator<Product> findAll() { // Mengembalikan Iterator
+        return productData.iterator();
     }
 
     public Product findById(String id) { // Ubah parameter ke String

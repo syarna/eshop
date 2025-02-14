@@ -5,6 +5,8 @@ import id.ac.ui.cs.advprog.eshop.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -20,11 +22,15 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> findAll() {
-        return productRepository.findAll();
+        // Konversi Iterator<Product> ke List<Product>
+        Iterator<Product> iterator = productRepository.findAll();
+        List<Product> productList = new ArrayList<>();
+        iterator.forEachRemaining(productList::add);
+        return productList;
     }
 
     @Override
-    public Product findById(String id) { // Ubah parameter ke String
+    public Product findById(String id) {
         return productRepository.findById(id);
     }
 
@@ -34,7 +40,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void delete(String id) { // Ubah parameter ke String
+    public void delete(String id) {
         productRepository.delete(id);
     }
 }
