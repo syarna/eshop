@@ -51,6 +51,7 @@ sonarqube {
         property("sonar.projectKey", "eshop_syarna")
         property("sonar.projectName", "eshop")
         property("sonar.host.url", "https://sonarqube.cs.ui.ac.id")
+        property("sonar.token", System.getenv("SONAR_TOKEN"))
     }
 }
 
