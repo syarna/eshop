@@ -56,12 +56,19 @@ class ProductRepositoryTest {
         product2.setName("Sampo Cap Bambang");
         product2.setQuantity(50);
 
+        // Tambahkan produk kedua ke repository
+        productRepository.create(product2);
+
         Iterator<Product> productIterator = productRepository.findAll();
         assertTrue(productIterator.hasNext());
+
         Product savedProduct = productIterator.next();
         assertEquals(product1.getId(), savedProduct.getId());
+
+        assertTrue(productIterator.hasNext()); // Pastikan iterator masih memiliki elemen kedua
         savedProduct = productIterator.next();
         assertEquals(product2.getId(), savedProduct.getId());
-        assertFalse(productIterator.hasNext());
+
+        assertFalse(productIterator.hasNext()); // Seharusnya tidak ada elemen lagi
     }
 }
