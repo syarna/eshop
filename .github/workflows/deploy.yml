@@ -1,0 +1,38 @@
+name: Deploy to Koyeb
+
+on:
+  push:
+    branches:
+      - main  # Change this to your deployment branch if needed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Build JAR File
+        run: ./gradlew clean bootJar
+
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Build and Push Docker Image
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/advshop:latest .
+          docker push ${{ secrets.DOCKER_USERNAME }}/advshop:latest
+
+      - name: Deploy to Koyeb
+        run: |
+          curl -X POST "https://app.koyeb.com/v1/apps/${{ secrets.KOYEB_APP_ID }}/deployments" \
+          -H "Authorization: Bearer ${{ secrets.KOYEB_API_TOKEN }}" \
+          -H "Content-Type: application/json" \
+          --data '{"strategy": "rolling"}'

@@ -46,10 +46,11 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:$junitJupiterVersion")
 }
 
-sonar {
+sonarqube {
     properties {
         property("sonar.projectKey", "eshop_syarna")
         property("sonar.projectName", "eshop")
+        property("sonar.host.url", "https://sonarqube.cs.ui.ac.id")
     }
 }
 
