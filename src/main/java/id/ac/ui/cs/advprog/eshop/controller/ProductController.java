@@ -91,9 +91,13 @@ class CarController extends ProductController {
     @GetMapping("/editCar/{carId}")
     public String editCarPage(@PathVariable String carId, Model model) {
         Car car = carService.findById(carId);
+        if (car == null) {
+            return "redirect:/car/listCar"; // Redirect jika tidak ditemukan
+        }
         model.addAttribute("car", car);
         return "editCar";
     }
+
 
     @PostMapping("/editCar")
     public String editCarPost(@ModelAttribute Car car, Model model) {
