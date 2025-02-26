@@ -2,6 +2,8 @@ package id.ac.ui.cs.advprog.eshop.repository;
 
 import id.ac.ui.cs.advprog.eshop.model.Car;
 import org.springframework.stereotype.Repository;
+import id.ac.ui.cs.advprog.eshop.util.CarIdGenerator;
+
 
 import java.util.ArrayList;
 import java.util.List;
