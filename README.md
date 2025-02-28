@@ -37,4 +37,38 @@ Saat ini, implementasi CI/CD belum sepenuhnya terpenuhi, karena masih ada kendal
 - Karena ada masalah pada SonarQube dan belum ada deployment ke PaaS.
 
 
+## Laporan Tutorial dan Exercise 3
+1.) Saya menerapkan beberapa prinsip SOLID sebagai berikut:
 
+- Single Responsibility Principle (SRP):
+memisahkan process flow dari controller, sehingga setiap kelas memiliki satu tanggung jawab utama.
+- Open/Closed Principle (OCP):
+membuat interface `CarRepository` dan mengimplementasikan beberapa kelas untuk berbagai jenis penyimpanan data (misalnya `InMemoryCarRepository`).
+- Liskov Substitution Principle (LSP):
+setiap subclass dari Car dapat menggantikan parent class tanpa mengubah perilaku program.
+- Interface Segregation Principle (ISP):
+membagi interface menjadi bagian-bagian yang lebih spesifik sehingga class hanya mengimplementasikan metode yang benar-benar dibutuhkan.
+- Dependency Inversion Principle (DIP):
+menggunakan dependency injection pada `CarService`, sehingga tidak bergantung langsung pada implementasi spesifik dari `CarRepository`.
+
+2.) Keuntungan Menerapkan Prinsip SOLID
+
+- Kode lebih mudah dipahami dan dikelola <br>
+Contoh: Dengan memisahkan `CarService` dari `CarController`, kita bisa menguji `CarService` secara independen tanpa perlu memanggil API HTTP.
+- Lebih fleksibel dan mudah diperluas <br>
+Contoh: Jika ingin menambahkan jenis mobil baru (misalnya HybridCar), kita cukup membuat subclass tanpa harus mengubah kode lain yang sudah ada.
+- Lebih mudah diuji (testable) <br>
+Contoh: Dengan menggunakan `CarRepository` sebagai interface, kita bisa menggunakan mock repository dalam unit test tanpa harus terhubung ke database asli.
+- Mengurangi dampak perubahan (low coupling) <br>
+Contoh: Jika kita ingin mengganti penyimpanan data dari in-memory ke database, kita cukup mengganti implementasi `CarRepository` tanpa mengubah `CarService`.
+
+3.) Kerugian Jika Tidak Menerapkan Prinsip SOLID
+
+- Kode sulit dipahami dan dimodifikasi <br>
+Contoh: Jika semua logika dimasukkan ke dalam satu kelas, maka setiap perubahan kecil akan mempengaruhi seluruh sistem.
+- Sulit untuk melakukan testing <br>
+Contoh: Jika `CarService` langsung bergantung pada `InMemoryCarRepository`, kita harus selalu terhubung ke database untuk menjalankan unit test, yang memperlambat proses pengujian.
+- Rentan terhadap bug akibat perubahan kode <br>
+Contoh: Jika kita harus mengubah kode `CarController` setiap kali ada perubahan di `CarService`, maka ada kemungkinan besar muncul bug yang tidak terduga.
+- Kode menjadi tidak fleksibel dan sulit dikembangkan <br>
+Contoh: Jika kita ingin menambahkan metode baru untuk `ElectricCar`, kita mungkin harus mengubah banyak bagian dalam kode yang seharusnya tidak perlu disentuh.
