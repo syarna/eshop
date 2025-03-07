@@ -72,3 +72,31 @@ Contoh: Jika `CarService` langsung bergantung pada `InMemoryCarRepository`, kita
 Contoh: Jika kita harus mengubah kode `CarController` setiap kali ada perubahan di `CarService`, maka ada kemungkinan besar muncul bug yang tidak terduga.
 - Kode menjadi tidak fleksibel dan sulit dikembangkan <br>
 Contoh: Jika kita ingin menambahkan metode baru untuk `ElectricCar`, kita mungkin harus mengubah banyak bagian dalam kode yang seharusnya tidak perlu disentuh.
+
+# Laporan dan Exercise Tutorial 4
+
+## Evaluasi TDD Workflow
+- **Apakah TDD membantu dalam memahami kebutuhan kode sebelum implementasi?**  
+  Ya, TDD membantu saya memecah fitur menjadi bagian-bagian kecil yang lebih terstruktur. Namun, saya masih sulit untuk menuliskan tes sebelum implementasi karena kurangnya pemahaman awal terhadap flow yang kompleks.
+
+
+- **Apakah tes yang saya buat cukup spesifik dan fokus pada satu hal?**  
+  Sebagian besar tes saya cukup spesifik, tetapi ada beberapa tes yang mencakup lebih dari satu skenario. Mungkin ke depannya, saya akan membuat tes yang benar-benar fokus hanya pada satu hal agar lebih mudah dalam debugging.
+
+
+- **Apakah saya mengikuti siklus Red-Green-Refactor dengan baik?**  
+  Saya sudah mencoba menerapkan siklus Red-Green-Refactor sebisa saya. Namun, ada beberapa kasus di mana saya langsung menulis implementasi sebelum tes berwarna *red* terlebih dahulu, yang sebenarnya mengurangi manfaat dari TDD itu sendiri.
+
+
+- **Apa yang dapat diperbaiki dalam implementasi TDD saya?**  
+  Untuk tutorial kali ini saya mencoba untuk menulis tes sebelum implementasi dan lebih sering melakukan *refactoring* setelah kode berhasil di run. Mungkin kedepannya saya akan mencoba *mocking* untuk menghindari ketergantungan pada database atau API eksternal.
+
+## Evaluasi Terhadap F.I.R.S.T. Principles
+| **Prinsip**  | **Evaluasi**                                                                                                                                                                                                      |
+|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Fast** (Cepat) | Tes berjalan cukup cepat, tetapi beberapa pengujian yang melibatkan database bisa diperbaiki dengan menggunakan mock objects.                                                                                     |
+| **Independent** (Independen) | Sebagian besar tes sudah independen, tetapi ada beberapa yang masih memiliki ketergantungan antar satu sama lain. Sehingga saya harus memastikan setiap tes dapat berjalan sendiri tanpa urutan tertentu.         |
+| **Repeatable** (Dapat diulang) | Tes yang saya buat dapat dijalankan di lingkungan yang berbeda tanpa hasil yang berubah.                                                          |
+| **Self-Validating** (Self-validating) | Semua tes memberikan hasil yang jelas (*pass/fail*) tanpa memerlukan inspeksi manual.                                                                                                                             |
+| **Timely** (Dibuat tepat waktu) | Saya mencoba membuat tes sebelum implementasi (sesuai TDD), tetapi ada beberapa kasus di mana saya baru menulis tes setelah implementasi selesai. |
+
