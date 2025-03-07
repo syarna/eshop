@@ -1,7 +1,7 @@
 package id.ac.ui.cs.advprog.eshop.model;
 
 import java.util.List;
-import java.util.Arrays;
+import enums.OrderStatus;
 
 public class Order {
     private String id;
@@ -10,12 +10,11 @@ public class Order {
     private String author;
     private String status;
 
-    // Constructor without status parameter
     public Order(String id, List<Product> products, Long orderTime, String author) {
         this.id = id;
         this.orderTime = orderTime;
         this.author = author;
-        this.status = "WAITING_PAYMENT";
+        this.status = OrderStatus.WAITING_PAYMENT.getValue();
 
         if (products.isEmpty()) {
             throw new IllegalArgumentException();
@@ -24,45 +23,16 @@ public class Order {
         }
     }
 
-    // Constructor with status parameter
     public Order(String id, List<Product> products, Long orderTime, String author, String status) {
         this(id, products, orderTime, author);
-        String[] statusList = {"WAITING_PAYMENT", "FAILED", "SUCCESS", "CANCELLED"};
-        if (Arrays.stream(statusList).noneMatch(item -> item.equals(status))) {
-            throw new IllegalArgumentException();
-        } else {
-            this.status = status;
-        }
+        this.setStatus(status);
     }
 
-    // Setter for status
     public void setStatus(String status) {
-        String[] statusList = {"WAITING_PAYMENT", "FAILED", "SUCCESS", "CANCELLED"};
-        if (Arrays.stream(statusList).noneMatch(item -> item.equals(status))) {
-            throw new IllegalArgumentException();
-        } else {
+        if (OrderStatus.contains(status)) {
             this.status = status;
+        } else {
+            throw new IllegalArgumentException();
         }
-    }
-
-    // Getters
-    public String getId() {
-        return id;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public Long getOrderTime() {
-        return orderTime;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public String getStatus() {
-        return status;
     }
 }
