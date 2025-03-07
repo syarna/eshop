@@ -1,26 +1,28 @@
 package id.ac.ui.cs.advprog.eshop.repository;
 
+import id.ac.ui.cs.advprog.eshop.enums.OrderStatus;
+import id.ac.ui.cs.advprog.eshop.model.Order;
+import id.ac.ui.cs.advprog.eshop.model.Product;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class OrderRepositoryTest {
     OrderRepository orderRepository;
     List<Order> orders;
 
     @BeforeEach
-    void setup() {
+    void setUp() {
         orderRepository = new OrderRepository();
 
         List<Product> products = new ArrayList<>();
         Product product1 = new Product();
-        product1.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
-        product1.setProductName("Sampo Cap Bambang");
-        product1.setProductQuantity(2);
+        product1.setId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product1.setName("Sampo Cap Bambang");
+        product1.setQuantity(2);
         products.add(product1);
 
         orders = new ArrayList<>();
@@ -32,7 +34,7 @@ class OrderRepositoryTest {
                 products, 1708570000L, "Safira Sudrajat");
         orders.add(order2);
 
-        Order order3 = new Order("e334ef40-9eff-4da8-9487-8ee697ecbf1e",
+        Order order3 = new Order("e334ef40-9eff-4da8-9487-8ee697cebf1e",
                 products, 1708570000L, "Bambang Sudrajat");
         orders.add(order3);
     }
@@ -55,8 +57,9 @@ class OrderRepositoryTest {
         Order order = orders.get(1);
         orderRepository.save(order);
 
-        Order newOrder = new Order(order.getId(), order.getProducts(), order.getOrderTime(),
-                order.getAuthor(), OrderStatus.SUCCESS.getValue());
+        Order newOrder = new Order(order.getId(), order.getProducts(),
+                order.getOrderTime(), order.getAuthor(),
+                OrderStatus.SUCCESS.getValue());
         Order result = orderRepository.save(newOrder);
 
         Order findResult = orderRepository.findById(orders.get(1).getId());
@@ -86,7 +89,7 @@ class OrderRepositoryTest {
             orderRepository.save(order);
         }
 
-        Order findResult = orderRepository.findById("zzzc");
+        Order findResult = orderRepository.findById("zzcc");
         assertNull(findResult);
     }
 
@@ -96,8 +99,7 @@ class OrderRepositoryTest {
             orderRepository.save(order);
         }
 
-        List<Order> orderList = orderRepository.findAllByAuthor(
-                orders.get(1).getAuthor());
+        List<Order> orderList = orderRepository.findAllByAuthor(orders.get(1).getAuthor());
         assertEquals(2, orderList.size());
     }
 
@@ -105,8 +107,7 @@ class OrderRepositoryTest {
     void testFindAllByAuthorIfAllLowercase() {
         orderRepository.save(orders.get(1));
 
-        List<Order> orderList = orderRepository.findAllByAuthor(
-                orders.get(1).getAuthor().toLowerCase());
+        List<Order> orderList = orderRepository.findAllByAuthor(orders.get(1).getAuthor().toLowerCase());
         assertTrue(orderList.isEmpty());
     }
 }
