@@ -1,0 +1,8 @@
+[package]
+name = "publisher"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+borsh = "0.9.3"
+crosstown_bus = "0.1.0" # Replace with the actual version if different
