@@ -113,3 +113,20 @@ AMQP (Advanced Message Queuing Protocol) adalah protokol komunikasi yang diranca
   - `5672` adalah port default yang digunakan oleh RabbitMQ untuk menerima koneksi AMQP.
 
 Secara keseluruhan, `guest:guest@localhost:5672` adalah kredensial dan alamat yang digunakan untuk menghubungkan aplikasi ke message broker RabbitMQ yang berjalan di mesin lokal pada port 5672.
+
+### a. Berapa banyak data yang akan dikirimkan oleh program publisher ke message broker dalam satu kali run?
+Jumlah data yang dikirimkan oleh program publisher ke message broker dalam satu kali run bergantung pada implementasi program publisher itu sendiri. Jika program publisher dirancang untuk mengirimkan sejumlah pesan tertentu (misalnya, 10 pesan), maka jumlah data yang dikirimkan adalah total ukuran dari semua pesan tersebut. Ukuran data ini dapat dihitung berdasarkan isi pesan (payload) yang dikirimkan, termasuk metadata atau header tambahan yang mungkin ditambahkan oleh protokol AMQP.
+
+Sebagai contoh:
+- Jika setiap pesan memiliki ukuran 1 KB dan program mengirimkan 10 pesan, maka total data yang dikirimkan adalah 10 KB.
+- Jika program publisher terus berjalan tanpa batas (misalnya, dalam mode streaming), maka jumlah data yang dikirimkan akan terus bertambah seiring waktu.
+
+### b. URL “amqp://guest:guest@localhost:5672” sama dengan yang ada di program subscriber, apa artinya?
+URL `amqp://guest:guest@localhost:5672` yang sama di program publisher dan subscriber menunjukkan bahwa kedua program tersebut terhubung ke message broker yang sama, yaitu RabbitMQ, yang berjalan di mesin lokal (`localhost`) pada port 5672. 
+
+Artinya:
+1. **Publisher dan Subscriber Berkomunikasi Melalui Broker yang Sama**: Publisher mengirimkan pesan ke message broker RabbitMQ, dan subscriber mengambil pesan dari broker yang sama. Dengan menggunakan URL yang sama, keduanya memastikan bahwa mereka beroperasi dalam lingkungan yang sama.
+2. **Autentikasi dengan Kredensial yang Sama**: Username `guest` dan password `guest` digunakan oleh kedua program untuk autentikasi ke RabbitMQ. Ini adalah kredensial default RabbitMQ, yang biasanya digunakan untuk pengujian lokal.
+3. **Komunikasi Asinkron**: Publisher dan subscriber tidak perlu saling mengetahui keberadaan satu sama lain. Mereka hanya perlu terhubung ke broker yang sama, dan broker akan mengatur pengiriman pesan dari publisher ke subscriber.
+
+Dengan kata lain, URL yang sama memastikan bahwa publisher dan subscriber dapat saling bertukar pesan melalui broker RabbitMQ yang sama.
