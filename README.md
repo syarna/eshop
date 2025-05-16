@@ -130,3 +130,8 @@ Artinya:
 3. **Komunikasi Asinkron**: Publisher dan subscriber tidak perlu saling mengetahui keberadaan satu sama lain. Mereka hanya perlu terhubung ke broker yang sama, dan broker akan mengatur pengiriman pesan dari publisher ke subscriber.
 
 Dengan kata lain, URL yang sama memastikan bahwa publisher dan subscriber dapat saling bertukar pesan melalui broker RabbitMQ yang sama.
+
+## Running RabbitMQ as message broker.
+
+![ “Running RabbitMQ as message broker.”](images/Module_09_Software_Architectures_v1.1-2025.png " “Running RabbitMQ as message broker.”")
+
