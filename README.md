@@ -2,7 +2,7 @@
 Nama  : Syarna Savitri <br>
 NPM   : 2206083565 <br>
 
-## Laporan Tutorial 1
+## Laporan Tutorial dan Exercise Tutorial 1
 Exercise 1: <br>
 ke 4 poin berhasil saya kerjakan (dapat dilihat dari commit history) <br>
 
@@ -73,9 +73,9 @@ Contoh: Jika kita harus mengubah kode `CarController` setiap kali ada perubahan 
 - Kode menjadi tidak fleksibel dan sulit dikembangkan <br>
 Contoh: Jika kita ingin menambahkan metode baru untuk `ElectricCar`, kita mungkin harus mengubah banyak bagian dalam kode yang seharusnya tidak perlu disentuh.
 
-# Laporan dan Exercise Tutorial 4
+## Laporan dan Exercise Tutorial 4
 
-## Evaluasi TDD Workflow
+### Evaluasi TDD Workflow
 - **Apakah TDD membantu dalam memahami kebutuhan kode sebelum implementasi?**  
   Ya, TDD membantu saya memecah fitur menjadi bagian-bagian kecil yang lebih terstruktur. Namun, saya masih sulit untuk menuliskan tes sebelum implementasi karena kurangnya pemahaman awal terhadap flow yang kompleks.
 
@@ -91,7 +91,7 @@ Contoh: Jika kita ingin menambahkan metode baru untuk `ElectricCar`, kita mungki
 - **Apa yang dapat diperbaiki dalam implementasi TDD saya?**  
   Untuk tutorial kali ini saya mencoba untuk menulis tes sebelum implementasi dan lebih sering melakukan *refactoring* setelah kode berhasil di run. Mungkin kedepannya saya akan mencoba *mocking* untuk menghindari ketergantungan pada database atau API eksternal.
 
-## Evaluasi Terhadap F.I.R.S.T. Principles
+### Evaluasi Terhadap F.I.R.S.T. Principles
 | **Prinsip**  | **Evaluasi**                                                                                                                                                                                                      |
 |--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Fast** (Cepat) | Tes berjalan cukup cepat, tetapi beberapa pengujian yang melibatkan database bisa diperbaiki dengan menggunakan mock objects.                                                                                     |
