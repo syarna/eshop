@@ -1,54 +1,63 @@
-use lapin::{options::*, types::FieldTable, Connection, ConnectionProperties};
-use tokio;
+use borsh::{BorshDeserialize, BorshSerialize};
+use crosstown_bus::{CrosstownBus, MessageHandler, HandleError};
+use std::{thread, time};
 
-#[tokio::main]
-async fn main() {
-    // Connect to RabbitMQ
-    let addr = "amqp://127.0.0.1:5672/%2f";
-    let conn = Connection::connect(addr, ConnectionProperties::default())
-        .await
-        .expect("Failed to connect to RabbitMQ");
+/// Struct representing the `UserCreatedEventMessage`
+/// This message contains the user ID and user name.
+#[derive(Debug, Clone, BorshDeserialize, BorshSerialize)]
+pub struct UserCreatedEventMessage {
+    pub user_id: String,
+    pub user_name: String,
+}
 
-    println!("Connected to RabbitMQ!");
+/// Handler for processing `UserCreatedEventMessage` messages.
+pub struct UserCreatedHandler;
 
-    // Create a channel
-    let channel = conn.create_channel().await.expect("Failed to create channel");
+impl MessageHandler<UserCreatedEventMessage> for UserCreatedHandler {
+    fn handle(&self, message: Box<UserCreatedEventMessage>) -> Result<(), HandleError> {
+        // Simulate a 1-second processing delay
+        let processing_delay = time::Duration::from_millis(1000);
+        thread::sleep(processing_delay);
 
-    // Declare a queue
-    let queue = channel
-        .queue_declare(
-            "event_queue",
-            QueueDeclareOptions::default(),
-            FieldTable::default(),
+        // Log the received message
+        println!(
+            "In Syarna Savitri's Computer [2206083565]. Message received: {:?}",
+            message
+        );
+
+        Ok(())
+    }
+
+    fn get_handler_action(&self) -> String {
+        // Return a string that identifies the action of this handler
+        // For example, you can return the name of the queue or the type of message it handles
+        "user_created_handler".to_owned()
+    }
+}
+
+fn main() {
+    // RabbitMQ connection string
+    let rabbitmq_url = "amqp://guest:guest@localhost:5672".to_owned();
+
+    // Create a new queue listener for the CrosstownBus
+    let listener = CrosstownBus::new_queue_listener(rabbitmq_url)
+        .expect("Failed to create queue listener");
+
+    // Start listening to the "user_created" queue with the `UserCreatedHandler`
+    listener
+        .listen(
+            "user_created".to_owned(),
+            UserCreatedHandler {},
+            crosstown_bus::QueueProperties {
+                auto_delete: false, // Queue will not be deleted automatically
+                durable: false,     // Queue is not durable (not persisted to disk)
+                use_dead_letter: true, // Enable dead-letter queue for failed messages
+            },
         )
-        .await
-        .expect("Failed to declare queue");
+        .expect("Failed to start listening to the queue");
 
-    println!("Declared queue: {:?}", queue.name());
-
-    // Start consuming messages
-    let mut consumer = channel
-        .basic_consume(
-            "event_queue",
-            "subscriber",
-            BasicConsumeOptions::default(),
-            FieldTable::default(),
-        )
-        .await
-        .expect("Failed to start consuming");
-
-    println!("Waiting for messages...");
-
-    while let Some(delivery) = consumer.next().await {
-        if let Ok((channel, delivery)) = delivery {
-            let message = String::from_utf8_lossy(&delivery.data);
-            println!("Received message: {}", message);
-
-            // Acknowledge the message
-            channel
-                .basic_ack(delivery.delivery_tag, BasicAckOptions::default())
-                .await
-                .expect("Failed to acknowledge message");
-        }
+    // Keep the program running to continuously listen for messages
+    loop {
+        thread::sleep(time::Duration::from_secs(1)); // Prevent busy looping
     }
 }
