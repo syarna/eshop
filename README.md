@@ -100,3 +100,16 @@ Contoh: Jika kita ingin menambahkan metode baru untuk `ElectricCar`, kita mungki
 | **Self-Validating** (Self-validating) | Semua tes memberikan hasil yang jelas (*pass/fail*) tanpa memerlukan inspeksi manual.                                                                                                                             |
 | **Timely** (Dibuat tepat waktu) | Saya mencoba membuat tes sebelum implementasi (sesuai TDD), tetapi ada beberapa kasus di mana saya baru menulis tes setelah implementasi selesai. |
 
+## Laporan Tutorial 9
+
+### a. Apa itu AMQP?
+AMQP (Advanced Message Queuing Protocol) adalah protokol komunikasi yang dirancang untuk mendukung pengiriman pesan antar aplikasi atau sistem secara andal dan terorganisir. AMQP digunakan dalam sistem message broker seperti RabbitMQ untuk mengatur pengiriman pesan antara pengirim (publisher) dan penerima (subscriber). Protokol ini mendukung fitur seperti antrian (queue), routing, dan pengelolaan pesan sehingga memungkinkan komunikasi yang asinkron dan terdistribusi.
+
+### b. Apa arti dari guest:guest@localhost:5672?
+- **guest (pertama)**: Ini adalah username yang digunakan untuk autentikasi ke message broker (misalnya RabbitMQ).
+- **guest (kedua)**: Ini adalah password yang digunakan untuk autentikasi ke message broker.
+- **localhost:5672**: 
+  - `localhost` adalah alamat host di mana message broker berjalan. Dalam hal ini, message broker berjalan di mesin lokal (localhost).
+  - `5672` adalah port default yang digunakan oleh RabbitMQ untuk menerima koneksi AMQP.
+
+Secara keseluruhan, `guest:guest@localhost:5672` adalah kredensial dan alamat yang digunakan untuk menghubungkan aplikasi ke message broker RabbitMQ yang berjalan di mesin lokal pada port 5672.
